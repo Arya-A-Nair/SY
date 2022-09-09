@@ -9,8 +9,9 @@ mean=sum/len(follower_list)
 print(f"Mean- {mean}")
 
 follower_list.sort()
+follower_list=[1,2,4,5]
 if(len(follower_list)%2==0):
-    median=(follower_list[len(follower_list)/2]+follower_list[len(follower_list)/2-1])/2
+    median=(follower_list[len(follower_list)//2]+follower_list[len(follower_list)//2-1])/2
 else:
     median=follower_list[len(follower_list)//2]
 print(f"Median- {median}")
@@ -22,6 +23,7 @@ for i in follower_list:
         frequency[i]=frequency[i]+1
     else:
         frequency[i]=1
+
 m=0
 for i in frequency:
     if(frequency[i]>m):
@@ -30,4 +32,3 @@ for i in frequency:
 
 print(f"Mode- {element}")
 
-varian
