@@ -15,15 +15,12 @@ struct Node* createBST(){
     return temp;
 };
 
-
 struct Node* newNode(int value){
     struct Node* temp=(struct Node*)malloc(sizeof(struct Node));
     temp->data=value;
     temp->left=temp->right=NULL;
     return temp;
 };
-
-
 struct Node *insert(struct Node *node, int key) {
     if (node == NULL) return newNode(key);
     if (key < node->data)
@@ -32,43 +29,15 @@ struct Node *insert(struct Node *node, int key) {
     node->right = insert(node->right, key);
     return node;
 }
-void inorder(struct Node *root) {
-    if (root != NULL) {
-        if(root->left) inorder(root->left);
-        printf("%d ", root->data);
-        if(root->right) inorder(root->right);
-    }
-    else{return;}
-}
-void deleteNode(struct Node* root,int key){
-    struct Node* temp=getParent(root,key);
-    if(temp->left->data==key){
-        temp->left=NULL;
-    }
-    if(temp->right->data==key){
-        temp->right=NULL;
-    }
-}
 
 
-struct Node* getParent(struct Node* node,int key){
-    struct Node* parent=NULL;
-    while(node!=NULL && node->data!=key){
-        parent=node;
-        if(parent->data>key){
-            node=node->left;
-        }
-        else{
-            node=node->right;
-        }
-    }
-    return parent;
-}
+
+
 
 struct Node* search(struct Node* root,int k)
 {
-    struct Node *p;
-    p = root;
+    struct Node *p = root;
+    
     while (p != NULL)
         {
         if (p->data == k)
@@ -87,12 +56,62 @@ struct Node* search(struct Node* root,int k)
     }
 }
 
+struct Node* getParent(struct Node* node,int key){
+    struct Node* parent=NULL;
+    while(node!=NULL && node->data!=key){
+        parent=node;
+        if(parent->data>key){
+            node=node->left;
+        }
+        else{
+            node=node->right;
+        }
+    }
+    return parent;
+}
+struct Node* deleteNode(struct Node* root,int key){
+    if(root==NULL)return root;
+    if(key<root->data) root->left=deleteNode(root->left,key);
+    if(key>root->data) root->right=deleteNode(root->right,key);
+    else{
+        if(root->left==NULL){
+            struct Node* temp=root->right;
+            free(root);
+            return temp;
+        }
+        else if(root->right==NULL){
+            struct Node* temp=root->left;
+            free(root);
+            return temp;
+        }
+
+        struct Node* temp1=root->right;
+        while(temp1 && temp1->left!=NULL){
+            temp1=temp1->left;
+        }
+        temp1->left=root->left;
+        root=root->right;
+    }
+    return root;
+}
+
+
+
+void inorder(struct Node *root) {
+    if (root != NULL) {
+        if(root->left) inorder(root->left);
+        printf("%d ", root->data);
+        if(root->right) inorder(root->right);
+    }
+    else{return;}
+}
+
 int main(){
     printf("Code By Arya Nair\n");
     int choice=0;
     struct Node* head;
-    while(choice!=5){
-        printf("1. Create BST\n2. Insert Element\n3. Display Inorder\n4.Get Parent\n5. Search\n6. Exit\nEnter Your choice: ");
+    while(choice!=7){
+        printf("1. Create BST\n2. Insert Element\n3. Display Inorder\n4. Get Parent\n5. Search\n6. Delete\n7. Exit\nEnter Your choice: ");
         scanf("%d",&choice);
         switch(choice)
         {
@@ -126,10 +145,18 @@ int main(){
                 int data;
                 scanf("%d",&data);
                 struct Node* temp=search(head,data);
-                printf("Answer- %d",temp->data);
+                printf("Answer- %d\n",temp->data);
                 break;
             }
-            case 6:
+            case 6:{
+                printf("Delete Node: ");
+                int data;
+                scanf("%d",&data);
+                deleteNode(head,data);
+                printf("Node Deleted\n");
+                break;
+            }
+            case 7:
             {
                 return 0;
             }
