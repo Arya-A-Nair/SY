@@ -1,0 +1,58 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+body {
+	padding: 2%;
+}
+table {
+	border: 2px dashed black;
+	background-color: #189ab4;
+	border-collapse: separate;
+	padding: 10px;
+	border-spacing: 10px;
+}
+
+th,
+td {
+	border: 2px solid black;
+	padding: 30px;
+}
+table > caption {
+	font-size: 4rem;
+}
+#randomElement {
+	font-size: 2rem;
+}
+.unordered {
+	font-size: 2rem;
+	padding: 5vw;
+}
+li {
+	display: list-item;
+	list-style-position: inside;
+}
+dl {
+	width: 50vw;
+}
+.Container {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	padding: 10%;
+}
+.Container > img {
+	width: 200px;
+	height: 200px;
+}
+span {
+	font-size: 4.5rem;
+}
+.highlight {
+	font-weight: 900;
+	font-size: 5rem;
+	color: #189ab4;
+}
